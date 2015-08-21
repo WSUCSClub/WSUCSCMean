@@ -1,0 +1,67 @@
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+.ng-invalid.ng-dirty {
+	border-color: #FA787E;
+}
+.ng-valid.ng-dirty {
+	border-color: #78FA89;
+}
+
+body {
+	background: url(../img/geometry2.png);
+}
+
+.content {
+	margin-top: 150px;
+}
+/******** HEADER *********/
+
+.navbar-brand {
+	font-family: Rockwell, cursive, Verdana;
+	min-height: 50px;
+	height: auto;
+	margin-top: 20px;
+}
+
+.navbar-brand img {
+	width: 80px;
+	display: inline;
+	margin-top: -20px;
+}
+
+.navbar-fixed-top {
+	margin-bottom: 50px;
+}
+
+.navbar-fixed-top {
+}
+
+.brand {
+	color: #512F92 ;
+	margin-left: 10px;
+	display: inline-block;
+}
+/******** end HEADER *********/
+
+/********* Intro **********/
+
+#intro {
+
+	padding: 80px 20px 0 20px;
+	overflow: auto;
+	background: url(../img/bgcontent.png);
+}
+
+/********** end Intro *******/
+
+
+@font-face {
+	src: local(Rockwell), url("../fonts/Rockwell.ttf");
+}
