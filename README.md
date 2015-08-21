@@ -1,4 +1,4 @@
-(http://104.236.16.81/images/WSU_CSC_Logo_Color_Web.png](http://104.236.16.81)
+![WSU CSC](http://104.236.16.81/images/WSU_CSC_Logo_Color_Web.png)
 
 
 
