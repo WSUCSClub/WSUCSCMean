@@ -27,11 +27,6 @@ var MemberSchema = new Schema({
 		required: 'Please fill Member first name',
 		trim: true
 	},
-	Status: {
-		type: String,
-		default: 'Active Member',
-		trim: true
-	},
 	created: {
 		type: Date,
 		default: Date.now
@@ -67,20 +62,12 @@ var MemberSchema = new Schema({
 		required: 'Please fill your phone number',
 		trim: true
 	},
-	committee: {
-		type: [{
-			type: String,
-			enum: ['MC', 'PDC', 'PC']
-		}],
-		default: ['MC']
-	},
-	class: {
-		type: [{
-			type: String,
-			enum: ['CS101', 'CS234', 'CS250', 'CS275','CS313', 'CS341']
-		}],
-		default: ['']
-	},
+	class:
+		[{
+			type: Boolean,
+			default: false
+		}]
+
 });
 
 mongoose.model('Member', MemberSchema);

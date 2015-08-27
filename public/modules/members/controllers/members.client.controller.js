@@ -1,23 +1,56 @@
 'use strict';
+	var membersApp = angular.module('members');
+	// Members controller
+	membersApp.controller('MembersController', ['$scope', '$stateParams', 'Authentication', 'Members',
+		function($scope, $stateParams, Authentication, Members) {
 
-// Members controller
-angular.module('members').controller('MembersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Members',
-	function($scope, $stateParams, $location, Authentication, Members) {
-		$scope.authentication = Authentication;
+			this.authentication = Authentication;
 
+			// Find a list of Members
+			this.members = Members.query();
+		}
+	]);
+
+	membersApp.controller('MembersController', ['$scope',  'Members',
+		function($scope, Members) {
+
+		}
+	]);
+
+
+	membersApp.controller('MembersController', ['$scope', 'Members',
+		function($scope, Members) {
+
+		}
+	]);
+
+/*
 		// Create new Member
 		$scope.create = function() {
 			// Create new Member object
 			var member = new Members ({
-				name: this.name
+				firstName: this.firstName,
+				lastName: this.lastName,
+				email: this.email,
+				username: this.username,
+				phone: this.phone,
+				class: [this.class]
 			});
+
+			console.log(member);
 
 			// Redirect after save
 			member.$save(function(response) {
 				$location.path('members/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.firstName = '';
+				$scope.lastName = '';
+				$scope.email = '';
+				$scope.username = '';
+				$scope.phone = '';
+				$scope.class = [];
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -51,16 +84,10 @@ angular.module('members').controller('MembersController', ['$scope', '$statePara
 			});
 		};
 
-		// Find a list of Members
-		$scope.find = function() {
-			$scope.members = Members.query();
-		};
 
 		// Find existing Member
 		$scope.findOne = function() {
 			$scope.member = Members.get({ 
 				memberId: $stateParams.memberId
 			});
-		};
-	}
-]);
+		};*/
