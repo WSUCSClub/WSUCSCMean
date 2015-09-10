@@ -13,7 +13,7 @@
             <div class="input-group stylish-input-group">
                 <input type="text" class="form-control"  placeholder="Search" ng-model="searchText">
                         <span class="input-group-addon">
-                            <button type="submit">
+                            <button type="button">
                                 <span class="glyphicon glyphicon-search"></span>
                             </button>
                         </span>
@@ -23,17 +23,19 @@
 
     <br>
     <div class="list-group">
-        <a data-ng-repeat="member in membersCtrl.members | filter:searchText" data-ng-href="#!/members/{{member._id}}" class="list-group-item">
+        <div data-ng-repeat="member in membersCtrl.members | filter:searchText">
+            <a ng-click="membersCtrl.viewMember('lg', member)" class="list-group-item">
 
-            <small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="member.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="member.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading">{{member.firstName + ' ' + member.lastName}}</h4>
+                <small class="list-group-item-text">
+                    Posted on
+                    <span data-ng-bind="member.created | date:'medium'"></span>
+                    by
+                    <span data-ng-bind="member.user.displayName"></span>
+                </small>
+                <h4 class="list-group-item-heading">{{member.firstName + ' ' + member.lastName}}</h4>
 
-        </a>
+            </a>
+        </div>
     </div>
 
     <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">

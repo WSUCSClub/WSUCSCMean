@@ -3,8 +3,8 @@
 	// Members controller..
 
 
-	membersApp.controller('MembersController', ['$scope', '$stateParams', 'Authentication', 'Members',
-		function($scope, $stateParams, Authentication, Members) {
+	membersApp.controller('MembersController', ['$scope', '$stateParams', '$modal', '$log','Authentication', 'Members',
+		function($scope, $stateParams, $modal, $log, Authentication , Members) {
 
 			this.authentication = Authentication;
 
@@ -15,6 +15,32 @@
 			$scope.findOne = function() {
 				$scope.member = Members.get({
 					memberId: $stateParams.memberId
+				});
+			};
+
+			// Open a modal window to update a single member
+			this.animationsEnabled = true;
+
+			this.viewMember = function (size, selectedMember ) {
+
+				var modalInstance = $modal.open({
+					animation: $scope.animationsEnabled,
+					templateUrl: 'modules/members/views/view-member.client.view.html',
+					controller: function($scope, $modalInstance, member){
+						$scope.member = member;
+					},
+					size: size,
+					resolve: {
+						member: function () {
+							return selectedMember;
+						}
+					}
+				});
+
+				modalInstance.result.then(function (selectedItem) {
+					$scope.selected = selectedItem;
+				}, function () {
+					$log.info('Modal dismissed at: ' + new Date());
 				});
 			};
 		}

@@ -11,7 +11,8 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				icon: 'glyphicon-user' ,
 				color:'btn-primary' ,
 				total: '35' ,
-				description: 'TOTAL MEMBERS'
+				description: 'TOTAL MEMBERS',
+				templateUrl: 'modules/members/views/list-members.client.view.html'
 			},
 
 			{
