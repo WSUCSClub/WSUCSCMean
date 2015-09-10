@@ -1,4 +1,4 @@
-<section data-ng-controller="MembersController">
+<section data-ng-controller="MembersCreateController as MembersCreateCtrl">
     <div class="page-header">
         <h1>New Member</h1>
     </div>
@@ -8,21 +8,21 @@
                 <div class="form-group">
                     <label class="control-label" for="firstName">First Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="firstName" id="firstName" class="form-control" placeholder="First Name" required>
+                        <input type="text" data-ng-model="MembersCreateCtrl.firstName" id="firstName" class="form-control" placeholder="First Name" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="lastName">Last Name</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="lastName" id="lastName" class="form-control" placeholder="Last Name" required>
+                        <input type="text" data-ng-model="MembersCreateCtrl.lastName" id="lastName" class="form-control" placeholder="Last Name" required>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="username">Username</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="username" id="username" class="form-control" placeholder="Username" required>
+                        <input type="text" data-ng-model="MembersCreateCtrl.username" id="username" class="form-control" placeholder="Username" required>
                     </div>
                 </div>
 
@@ -30,18 +30,18 @@
                 <div class="form-group">
                     <label class="control-label" for="email">Email</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="email" id="email" class="form-control" placeholder="email" >
+                        <input type="text" data-ng-model="MembersCreateCtrl.email" id="email" class="form-control" placeholder="email" >
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label" for="phone">Phone number</label>
                     <div class="controls">
-                        <input type="text" data-ng-model="phone" id="phone" maxlength="14" class="form-control" placeholder="phone" >
+                        <input type="text" data-ng-model="MembersCreateCtrl.phone" id="phone" maxlength="14" class="form-control" placeholder="phone" >
                     </div>
                 </div>
 
-
+<!--
                 <div class="form-group">
                     <label class="control-label" >Classes taken</label>
                     <label class="checkbox-inline">
@@ -53,12 +53,9 @@
                     <label class="checkbox-inline">
                         <input type="checkbox" name="class" ng-model="class.cs250"> CS250
                     </label>
-                </div>
+                </div>-->
 
-                <pre>
-                 {{ member.firstName }}
-                 {{ class }}
-                 </pre>
+
 
                 <div class="form-group">
                     <input type="submit" class="btn btn-default">

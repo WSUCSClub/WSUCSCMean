@@ -61,13 +61,7 @@ var MemberSchema = new Schema({
 		default: '',
 		required: 'Please fill your phone number',
 		trim: true
-	},
-	class:
-		[{
-			type: Boolean,
-			default: false
-		}]
-
+	}
 });
 
 mongoose.model('Member', MemberSchema);

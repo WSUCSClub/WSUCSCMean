@@ -2,19 +2,42 @@
     <div class="page-header">
         <h1>Members</h1>
     </div>
+
+    <div class="row">
+
+        <div class="col-xs-12 col-sm-4 text-center">
+            <button type="button" class="btn btn-success btn-block"> Add a Member</button>
+        </div>
+
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group stylish-input-group">
+                <input type="text" class="form-control"  placeholder="Search" ng-model="searchText">
+                        <span class="input-group-addon">
+                            <button type="submit">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+            </div>
+        </div>
+    </div>
+
+    <br>
     <div class="list-group">
-        <a data-ng-repeat="member in membersCtrl.members" data-ng-href="#!/members/{{member._id}}" class="list-group-item">
-		    {{member.firstName}}
+        <a data-ng-repeat="member in membersCtrl.members | filter:searchText" data-ng-href="#!/members/{{member._id}}" class="list-group-item">
+
             <small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="member.created | date:'medium'"></span>
 				by
 				<span data-ng-bind="member.user.displayName"></span>
 			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="member.name"></h4>
+			<h4 class="list-group-item-heading">{{member.firstName + ' ' + member.lastName}}</h4>
+
         </a>
     </div>
+
     <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
     	No Members yet, why don't you <a href="/#!/members/create">create one</a>?
     </div>
+
 </section>
