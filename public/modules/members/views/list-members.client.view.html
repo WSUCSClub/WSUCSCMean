@@ -23,8 +23,14 @@
         </div>
     </div>
 
+
     <br>
 
     <member-list></member-list>
+
+
+    <div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
+        No Members yet, why don't you <a href="/#!/members/create">create one</a>?
+    </div>
 
 </section>

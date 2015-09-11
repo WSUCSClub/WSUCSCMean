@@ -190,13 +190,18 @@
 		}
 	]);
 
-	membersApp.directive('member-list', [function() {
+	membersApp.directive('memberList', ['Members', 'Notify', function() {
 		return {
 			restrict: 'E',
 			transclude: true,
 			templateUrl: 'modules/members/views/member-list.client.view.html',
 			link: function(scope, element, attrs){
+				// When a new member is added update, the customer List
 
+				Notify.getMsg('NewMember', function(event,data){
+					scope.membersCtrl.members = Members.query();
+
+				});
 			}
 		};
 	}]);

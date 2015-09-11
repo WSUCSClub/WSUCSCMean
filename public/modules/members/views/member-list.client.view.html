@@ -1,4 +1,26 @@
 <div class="list-group">
+
+    <div class="items col-xs-12 col-sm-6 col-md-6 col-lg-6 clearfix" data-ng-repeat="member in membersCtrl.members | filter:searchText">
+        <div class="info-block block-info clearfix">
+            <div class="square-box pull-left">
+                <span class="glyphicon glyphicon-user glyphicon-lg"></span>
+            </div>
+            <h5>{{member.firstName + ' ' + member.lastName}}</h5>
+            <p>{{member.username}}</p>
+            <span>{{member.email}}</span>
+            <span>{{member.phone}}</span>
+
+            <a ng-click="membersCtrl.editMember('lg', member)" class="list-group-item">
+
+                edit
+
+            </a>
+
+        </div>
+    </div>
+
+
+<!--
     <div data-ng-repeat="member in membersCtrl.members | filter:searchText">
         <a ng-click="membersCtrl.viewMember('lg', member)" class="list-group-item">
 
@@ -18,9 +40,7 @@
 
         </a>
 
-    </div>
-</div>
 
-<div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
-    No Members yet, why don't you <a href="/#!/members/create">create one</a>?
+
+    </div>-->
 </div>
