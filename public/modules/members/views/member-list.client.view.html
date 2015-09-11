@@ -1,0 +1,26 @@
+<div class="list-group">
+    <div data-ng-repeat="member in membersCtrl.members | filter:searchText">
+        <a ng-click="membersCtrl.viewMember('lg', member)" class="list-group-item">
+
+            <small class="list-group-item-text">
+                Posted on
+                <span data-ng-bind="member.created | date:'medium'"></span>
+                by
+                <span data-ng-bind="member.user.displayName"></span>
+            </small>
+            <h4 class="list-group-item-heading">{{member.firstName + ' ' + member.lastName}}</h4>
+
+        </a>
+
+        <a ng-click="membersCtrl.editMember('lg', member)" class="list-group-item">
+
+            edit
+
+        </a>
+
+    </div>
+</div>
+
+<div class="alert alert-warning text-center" data-ng-hide="!members.$resolved || members.length">
+    No Members yet, why don't you <a href="/#!/members/create">create one</a>?
+</div>

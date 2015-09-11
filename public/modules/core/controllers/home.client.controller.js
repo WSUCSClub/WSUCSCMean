@@ -12,7 +12,7 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				color:'btn-primary' ,
 				total: '35' ,
 				description: 'TOTAL MEMBERS',
-				templateUrl: 'modules/members/views/list-members.client.view.html'
+				templateUrl: '/modules/members/views/list-members.client.view.html'
 			},
 
 			{

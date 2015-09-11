@@ -65,6 +65,7 @@ exports.delete = function(req, res) {
 			});
 		} else {
 			res.jsonp(member);
+
 		}
 	});
 };
