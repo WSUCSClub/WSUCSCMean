@@ -149,15 +149,16 @@
 	]);
 
 
-	membersApp.controller('MembersEditController', ['$scope', 'Members',
-		function($scope, Members) {
+	membersApp.controller('MembersEditController', ['$scope', 'Members', 'Notify',
+		function($scope, Members, Notify) {
 
 
 			// Update existing Member
 			this.update = function(updatedMember) {
 				var member = updatedMember;
 
-				member.$update(function() {
+				member.$update(function(response) {
+					Notify.sendMsg('MemberUpdated', {'id': response._id});
 
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
@@ -168,29 +169,27 @@
 			// Remove existing Member
 			this.remove = function(member) {
 				if ( member ) {
-					member.$remove();
+					member.$remove(function(response){
+						Notify.sendMsg('MemberRemoved', {'id': response._id});
+					});
 
 					for (var i in this.members) {
 						if (this.members [i] === member) {
 							this.members.splice(i, 1);
-							console.log('member removed');
 						}
 					}
 				} else {
-					this.member.$remove(function() {
+					this.member.$remove(function(response) {
+						Notify.sendMsg('MemberRemoved', {'id': response._id});
 					});
 				}
 			};
 
 
-			/*Notify.getMsg('NewMember', function(event, data){
-				scope.memberCtrl.members = Members.query();
-			});*/
-
 		}
 	]);
 
-	membersApp.directive('memberList', ['Members', 'Notify', function() {
+	membersApp.directive('memberList', ['Members', 'Notify', function(Members, Notify) {
 		return {
 			restrict: 'E',
 			transclude: true,
@@ -200,8 +199,16 @@
 
 				Notify.getMsg('NewMember', function(event,data){
 					scope.membersCtrl.members = Members.query();
-
 				});
+
+				Notify.getMsg('MemberRemoved', function(event,data){
+					scope.membersCtrl.members = Members.query();
+				});
+
+				Notify.getMsg('MemberUpdated', function(event,data){
+					scope.membersCtrl.members = Members.query();
+				});
+
 			}
 		};
 	}]);

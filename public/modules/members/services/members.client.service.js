@@ -21,7 +21,7 @@ angular.module('members')
 				data = data || {};
 				$rootScope.$emit(msg, data);
 
-				console.log('message sent');
+				console.log('Notification: '+msg);
 			};
 
 			notify.getMsg = function(msg, func, scope){
