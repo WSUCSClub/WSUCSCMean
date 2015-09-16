@@ -59,7 +59,6 @@ var MemberSchema = new Schema({
 	phone: {
 		type: String,
 		default: '',
-		required: 'Please fill your phone number',
 		trim: true
 	}
 });

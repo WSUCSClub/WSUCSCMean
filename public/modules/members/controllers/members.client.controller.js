@@ -8,8 +8,12 @@
 
 			this.authentication = Authentication;
 
+			$scope.loading = true;
+
 			// Find a list of Members
-			this.members = Members.query();
+			this.members = Members.query(function(){
+				$scope.loading = false;
+			});
 
 			// Find existing Member
 			/*$scope.findOne = function() {
@@ -212,6 +216,7 @@
 			}
 		};
 	}]);
+
 
 /*
 */

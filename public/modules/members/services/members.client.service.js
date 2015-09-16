@@ -20,8 +20,18 @@ angular.module('members')
 			notify.sendMsg = function(msg, data){
 				data = data || {};
 				$rootScope.$emit(msg, data);
-
-				console.log('Notification: '+msg);
+				if (msg === 'NewMember'){
+					console.log('Notification: New Member is created');
+				}
+				else if (msg === 'MemberRemoved') {
+					console.log('Notification: Member is updated');
+				}
+				else if (msg === 'MemberUpdated'){
+					console.log('Notification: Member is removed');
+				}
+				else{
+					console.log('Notification: '+ msg);
+				}
 			};
 
 			notify.getMsg = function(msg, func, scope){

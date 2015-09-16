@@ -6,7 +6,7 @@
 
     <div class="modal-body">
 
-            <form class="form-horizontal" data-ng-submit="update()" novalidate>
+            <form class="form-horizontal" data-ng-submit="update()" novalidate name="updateMemberform">
                 <fieldset>
                     <div class="form-group">
                         <label class="control-label" for="firstName">First Name</label>
@@ -39,7 +39,7 @@
 
     <div class="modal-footer">
         <button class="btn btn-danger" type="button" ng-click="memberEditCtrl.remove(member); ok()"><i class="glyphicon glyphicon-trash"></i></button>
-        <button class="btn btn-primary" type="button" ng-click="memberEditCtrl.update(member); ok()">Update</button>
+        <button class="btn btn-primary" type="button" ng-click="memberEditCtrl.update(member); ok()" ng-disabled="updateMemberform.$invalid">Update</button>
         <button class="btn btn-warning" type="button" ng-click="cancel()">close</button>
     </div>
 

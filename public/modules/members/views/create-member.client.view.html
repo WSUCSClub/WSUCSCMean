@@ -5,7 +5,7 @@
 
     <div class="modal-body">
         <div class="col-md-12">
-            <form class="form-horizontal" data-ng-submit="create()" novalidate>
+            <form class="form-horizontal" data-ng-submit="create()" novalidate >
                 <fieldset>
                     <div class="form-group">
                         <label class="control-label" for="firstName">First Name</label>
@@ -32,7 +32,7 @@
                     <div class="form-group">
                         <label class="control-label" for="email">Email</label>
                         <div class="controls">
-                            <input type="text" data-ng-model="MembersCreateCtrl.email" id="email" class="form-control" placeholder="email" >
+                            <input type="text" data-ng-model="MembersCreateCtrl.email" id="email" class="form-control" placeholder="email" required >
                         </div>
                     </div>
 
@@ -70,7 +70,7 @@
     </div>
 
     <div class="modal-footer">
-        <button class="btn btn-primary" type="button" ng-click="MembersCreateCtrl.create(); ok()">Update</button>
+        <button class="btn btn-primary" type="button" ng-click="MembersCreateCtrl.create(); ok()">Create</button>
         <button class="btn btn-warning" type="button" ng-click="cancel()">close</button>
     </div>
 </section>

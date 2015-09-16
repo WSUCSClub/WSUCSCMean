@@ -1,7 +1,9 @@
 'use strict';
 
+require('dotenv').load();
+
 module.exports = {
-	db: 'mongodb://hakimelek:12345678@ds035673.mongolab.com:35673/mean-database',
+	db:  process.env.MONGO_DB,
 	app: {
 		title: 'WSU Computer Science Club - administration'
 	},
