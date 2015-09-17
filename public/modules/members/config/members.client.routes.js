@@ -21,5 +21,10 @@ angular.module('members').config(['$stateProvider',
 			url: '/members/:memberId/edit',
 			templateUrl: 'modules/members/views/edit-member.client.view.html'
 		});
+
+	/*	if(window.history && window.history.pushState) {
+			// use the HTML5 History API
+			$locationProvider.html5Mode(true);
+		}*/
 	}
 ]);

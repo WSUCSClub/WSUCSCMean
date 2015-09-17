@@ -5,11 +5,11 @@ module.exports = function(app) {
 	var projects = require('../../app/controllers/projects.server.controller');
 
 	// Projects Routes
-	app.route('/projects')
+	app.route('/api/projects')
 		.get(projects.list)
 		.post(users.requiresLogin, projects.create);
 
-	app.route('/projects/:projectId')
+	app.route('/api/projects/:projectId')
 		.get(projects.read)
 		.put(users.requiresLogin, projects.hasAuthorization, projects.update)
 		.delete(users.requiresLogin, projects.hasAuthorization, projects.delete);

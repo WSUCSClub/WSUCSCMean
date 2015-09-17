@@ -5,11 +5,11 @@ module.exports = function(app) {
 	var emails = require('../../app/controllers/emails.server.controller');
 
 	// Emails Routes
-	app.route('/emails')
+	app.route('/api/emails')
 		.get(emails.list)
 		.post(users.requiresLogin, emails.create);
 
-	app.route('/emails/:emailId')
+	app.route('/api/emails/:emailId')
 		.get(emails.read)
 		.put(users.requiresLogin, emails.hasAuthorization, emails.update)
 		.delete(users.requiresLogin, emails.hasAuthorization, emails.delete);

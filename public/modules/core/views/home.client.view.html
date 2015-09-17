@@ -1,26 +1,19 @@
 <section data-ng-controller="HomeController">
 
 	<div class="row">
-		<div class="col-sm-6" ng-repeat="alert in alerts">
 
-		   <div class="row">
+			   <div class="row mtbox">
+				   <div class="col-md-2 col-sm-2  box0 " ng-repeat="alert in alerts">
+					 <a href="/#!/{{alert.templateUrl}}">
+					     <div class="box1">
+						   <i class="glyphicon" ng-class="alert.icon"></i>
+						   <h3>{{alert.total}}</h3>
+					   </div>
+					   <p>{{alert.description}}</p>
+					 </a>
+				   </div>
+			   </div><!-- /row mt -->
 
-			<div class="col-xs-1">
-					<button type="button" class="btn" ng-class="alert.color">
-						<i class="glyphicon" ng-class="alert.icon"></i>
-					</button>
-			</div>
-			<div class="col-xs-11">
-				<div class="row">
-					<a data-ng-href="#!/{{alert.templateUrl}}">
-						<div class="col-xs-10 col-xs-offset-2">
-							<h1>{{alert.total}}</h1>
-							<span class="text-muted">{{alert.description}}</span>
-						</div>
-					</a>
-				</div>
-			</div>
-		  </div>
 		</div>
 	</div>
 </section>

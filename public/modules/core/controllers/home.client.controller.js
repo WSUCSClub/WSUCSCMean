@@ -12,14 +12,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				color:'btn-primary' ,
 				total: '35' ,
 				description: 'TOTAL MEMBERS',
-				templateUrl: '/modules/members/views/list-members.client.view.html'
+				templateUrl: 'members'
 			},
 
 			{
 				icon: 'glyphicon-blackboard' ,
 				color:'btn-info' ,
 				total: '5' ,
-				description: 'TOTAL PROJECTS'
+				description: 'TOTAL PROJECTS',
+				templateUrl: 'projects'
+
 			},
 			{
 				icon: 'glyphicon-star' ,

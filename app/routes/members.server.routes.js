@@ -5,11 +5,11 @@ module.exports = function(app) {
 	var members = require('../../app/controllers/members.server.controller');
 
 	// Members Routes
-	app.route('/members')
+	app.route('/api/members')
 		.get(members.list)
 		.post(users.requiresLogin, members.create);
 
-	app.route('/members/:memberId')
+	app.route('/api/members/:memberId')
 		.get(members.read)
 		.put(users.requiresLogin, members.hasAuthorization, members.update)
 		.delete(users.requiresLogin, members.hasAuthorization, members.delete);
@@ -17,6 +17,6 @@ module.exports = function(app) {
 	// Finish by binding the Member middleware
 	app.param('memberId', members.memberByID);
 
-	app.route('/email')
+	app.route('/api/email')
 		.get(members.sendemail);
 };

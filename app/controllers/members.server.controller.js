@@ -122,6 +122,8 @@ exports.sendemail = function(req, res) {
 	var SendGrid = require('sendgrid-nodejs').SendGrid;
 	var sendgrid = new SendGrid('sendgrid_username', 'sendgrid_password');
 
+	res.send(sendgrid_username);
+
 	sendgrid.send({
 			to: [],
 			from: 'contact@wsucsclub.org',
