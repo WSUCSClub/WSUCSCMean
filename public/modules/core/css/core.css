@@ -1,6 +1,6 @@
-.content {
+/* .content {
 	margin-top: 50px;
-}
+} */
 .undecorated-link:hover {
 	text-decoration: none;
 }
@@ -29,26 +29,27 @@ body {
 	font-family: Rockwell, cursive, Verdana;
 	min-height: 50px;
 	height: auto;
-	margin-top: 20px;
 }
 
 .brand img {
-	width: 40px;
+	width: 60px;
 	display: inline;
-	margin-top: -20px;
 }
 
+.brand h4 {
+	display: inline-block;
+}
 
 .brand {
 	color: #512F92 ;
 	margin-left: 10px;
-	display: inline-block;
+	display: inline;
 }
 
 nav{
-	padding-top: 40px;
 	padding-left: 30px;
 }
+
 
 /******** end HEADER *********/
 
@@ -93,21 +94,13 @@ nav{
 }
 
 
-/*
-Template Name: DASHGUM FREE - Bootstrap 3.2 Admin Theme
-Template Version: 1.0
-Author: Carlos Alvarez
-Website: http://blacktie.co
-Premium: http://www.gridgum.com
-*/
-
 /* Import fonts */
 @import url(http://fonts.googleapis.com/css?family=Ruda:400,700,900);
 
 /* BASIC THEME CONFIGURATION */
 body {
+	background: url(../img/geometry2.png);
 	color: #797979;
-	background: #f2f2f2;
 	font-family: 'Ruda', sans-serif;
 	padding: 0px !important;
 	margin: 0px !important;
@@ -378,7 +371,7 @@ ul.sidebar-menu , ul.sidebar-menu li ul.sub{
 }
 
 ul.sidebar-menu {
-	margin-top: 75px;
+	margin-top: 100px;
 }
 
 #sidebar > ul > li > ul.sub {
@@ -493,11 +486,12 @@ ul.sidebar-menu li a.active i {
 /* MAIN CONTENT CONFIGURATION */
 #main-content {
 	margin-left: 210px;
+	margin-top: 40px;
 }
 
 .header, .footer {
 	min-height: 60px;
-	padding: 0 15px;
+	padding: 10px 15px;
 }
 
 .header {
@@ -508,7 +502,7 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-	background: #ffd777;
+	background: white;
 	border-bottom: 1px solid #c9aa5f;
 }
 
@@ -2334,7 +2328,3 @@ label {
 .site-min-height {
 	min-height: 900px;
 }
-
-
-
-

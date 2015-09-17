@@ -193,7 +193,7 @@
 		}
 	]);
 
-	membersApp.directive('memberList', ['Members', 'Notify', function(Members, Notify) {
+	membersApp.directive('memberList', ['Members', 'Notify', function( Members, Notify) {
 		return {
 			restrict: 'E',
 			transclude: true,
