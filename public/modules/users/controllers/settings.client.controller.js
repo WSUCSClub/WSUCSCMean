@@ -7,7 +7,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
-		// Check if there are additional accounts 
+		// Check if there are additional accounts
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
 			for (var i in $scope.user.additionalProvidersData) {
 				return true;
@@ -25,7 +25,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.removeUserSocialAccount = function(provider) {
 			$scope.success = $scope.error = null;
 
-			$http.delete('/users/accounts', {
+			$http.delete('api/users/accounts', {
 				params: {
 					provider: provider
 				}
@@ -59,7 +59,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
+			$http.post('api/users/password', $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
 				$scope.success = true;
 				$scope.passwordDetails = null;
