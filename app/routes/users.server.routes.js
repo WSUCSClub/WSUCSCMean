@@ -29,7 +29,7 @@ module.exports = function(app) {
 	app.route('/auth/facebook').get(passport.authenticate('facebook', {
 		scope: ['email']
 	}));
-	app.route('/api/auth/facebook/callback').get(users.oauthCallback('facebook'));
+	app.route('/auth/facebook/callback').get(users.oauthCallback('facebook'));
 
 	// Setting the twitter oauth routes
 	app.route('/auth/twitter').get(passport.authenticate('twitter'));

@@ -11,16 +11,14 @@
 			$scope.loading = true;
 
 			// Find a list of Members
-			this.members = Members.query(function(){
-				$scope.loading = false;
-			});
+			this.members = Members.query();
 
 			// Find existing Member
-			/*$scope.findOne = function() {
+			$scope.findOne = function() {
 				$scope.member = Members.get({
 					memberId: $stateParams.memberId
 				});
-			};*/
+			};
 
 
 

@@ -1,24 +1,19 @@
-<section data-ng-controller="MembersController as memberCtrl">
+<section data-ng-controller="MembersController as MembersCtrl" data-ng-init="findOne()">
 
-	<div class="modal-header">
-		<h4 class="list-group-item-heading">{{member.firstName + ' ' + member.lastName}}</h4>
-	</div>
-	<div class="modal-body">
+		<a href="/#!/members">Back to members</a>
 
-
-		<a class="btn btn-primary" ng-click="memberCtrl.editMember('lg', member)">
-			<i class="glyphicon glyphicon-edit"></i>
-		</a>
+		<div class="page-header">
+			<h1>{{member.firstName + ' ' + member.lastName}}</h1>
+		</div>
 
 		<ul>
-			<li>{{member.phone}}</li>
 			<li>{{member.email}}</li>
 		</ul>
 
 
 		<small>
 			<em class="text-muted">
-				Posted on
+				Added in
 				<span data-ng-bind="member.created | date:'mediumDate'"></span>
 				by
 				<span data-ng-bind="member.user.displayName"></span>
@@ -26,11 +21,6 @@
 		</small>
 
 
-
-	</div>
-	<div class="modal-footer">
-		<button class="btn btn-warning" type="button" ng-click="cancel()">close</button>
-	</div>
 
 
 
