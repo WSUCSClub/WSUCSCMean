@@ -2,7 +2,7 @@
 
 
 module.exports = {
-	db:  process.env.MONGO_DB,
+	db:  process.env.MONGOLAB_URI,
 	app: {
 		title: 'WSU Computer Science Club - administration'
 	},

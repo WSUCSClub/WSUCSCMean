@@ -948,7 +948,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		if ($scope.authentication.user) $location.path('/');
 
 		$scope.signup = function() {
-			$http.post('/auth/signup', $scope.credentials).success(function(response) {
+			$http.post('api/auth/signup', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
@@ -960,7 +960,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		};
 
 		$scope.signin = function() {
-			$http.post('/auth/signin', $scope.credentials).success(function(response) {
+			$http.post('api/auth/signin', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
@@ -972,6 +972,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		};
 	}
 ]);
+
 'use strict';
 
 angular.module('users').controller('PasswordController', ['$scope', '$stateParams', '$http', '$location', 'Authentication',
@@ -985,7 +986,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 		$scope.askForPasswordReset = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('/auth/forgot', $scope.credentials).success(function(response) {
+			$http.post('api/auth/forgot', $scope.credentials).success(function(response) {
 				// Show user success message and clear form
 				$scope.credentials = null;
 				$scope.success = response.message;
@@ -1001,7 +1002,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 		$scope.resetUserPassword = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
+			$http.post('api/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
 				$scope.passwordDetails = null;
 
@@ -1009,13 +1010,14 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 				Authentication.user = response;
 
 				// And redirect to the index page
-				$location.path('/password/reset/success');
+				$location.path('api/password/reset/success');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
 		};
 	}
 ]);
+
 'use strict';
 
 angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
@@ -1025,7 +1027,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
-		// Check if there are additional accounts 
+		// Check if there are additional accounts
 		$scope.hasConnectedAdditionalSocialAccounts = function(provider) {
 			for (var i in $scope.user.additionalProvidersData) {
 				return true;
@@ -1043,7 +1045,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.removeUserSocialAccount = function(provider) {
 			$scope.success = $scope.error = null;
 
-			$http.delete('/users/accounts', {
+			$http.delete('api/users/accounts', {
 				params: {
 					provider: provider
 				}
@@ -1077,7 +1079,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		$scope.changeUserPassword = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('/users/password', $scope.passwordDetails).success(function(response) {
+			$http.post('api/users/password', $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
 				$scope.success = true;
 				$scope.passwordDetails = null;
@@ -1087,6 +1089,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 		};
 	}
 ]);
+
 'use strict';
 
 // Authentication service for user variables
