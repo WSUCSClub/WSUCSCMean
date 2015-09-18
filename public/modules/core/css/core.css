@@ -141,7 +141,7 @@ a {
 
 /* BASIC THEME CONFIGURATION */
 body {
-	background: url(../img/geometry2.png);
+	background: url("../img/geometry2.png");
 	color: #797979;
 	font-family: 'Ruda', sans-serif;
 	padding: 0px !important;

@@ -948,7 +948,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		if ($scope.authentication.user) $location.path('/');
 
 		$scope.signup = function() {
-			$http.post('api/auth/signup', $scope.credentials).success(function(response) {
+			$http.post('/auth/signup', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
@@ -960,10 +960,11 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 		};
 
 		$scope.signin = function() {
-			$http.post('api/auth/signin', $scope.credentials).success(function(response) {
+			$http.post('/auth/signin', $scope.credentials).success(function(response) {
 				// If successful we assign the response to the global user model
 				$scope.authentication.user = response;
 
+	
 				// And redirect to the index page
 				$location.path('/');
 			}).error(function(response) {
@@ -986,7 +987,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 		$scope.askForPasswordReset = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('api/auth/forgot', $scope.credentials).success(function(response) {
+			$http.post('/auth/forgot', $scope.credentials).success(function(response) {
 				// Show user success message and clear form
 				$scope.credentials = null;
 				$scope.success = response.message;
@@ -1002,7 +1003,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 		$scope.resetUserPassword = function() {
 			$scope.success = $scope.error = null;
 
-			$http.post('api/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
+			$http.post('/auth/reset/' + $stateParams.token, $scope.passwordDetails).success(function(response) {
 				// If successful show success message and clear form
 				$scope.passwordDetails = null;
 
@@ -1010,7 +1011,7 @@ angular.module('users').controller('PasswordController', ['$scope', '$stateParam
 				Authentication.user = response;
 
 				// And redirect to the index page
-				$location.path('api/password/reset/success');
+				$location.path('/password/reset/success');
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
