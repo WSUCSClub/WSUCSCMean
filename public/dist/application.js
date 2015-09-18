@@ -3,7 +3,7 @@
 // Init the application configuration module for AngularJS application
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
-	var applicationModuleName = 'starterapp';
+	var applicationModuleName = 'wsucsclub';
 	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils'];
 
 	// Add a new vertical module
@@ -48,7 +48,15 @@ ApplicationConfiguration.registerModule('core');
 'use strict';
 
 // Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('emails');
+'use strict';
+
+// Use applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('members');
+'use strict';
+
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('projects');
 'use strict';
 
 // Use Applicaion configuration module to register a new module
@@ -101,14 +109,16 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
 				color:'btn-primary' ,
 				total: '35' ,
 				description: 'TOTAL MEMBERS',
-				templateUrl: '/modules/members/views/list-members.client.view.html'
+				templateUrl: 'members'
 			},
 
 			{
 				icon: 'glyphicon-blackboard' ,
 				color:'btn-info' ,
 				total: '5' ,
-				description: 'TOTAL PROJECTS'
+				description: 'TOTAL PROJECTS',
+				templateUrl: 'projects'
+
 			},
 			{
 				icon: 'glyphicon-star' ,
@@ -310,6 +320,133 @@ angular.module('core').service('Menus', [
 ]);
 'use strict';
 
+// Configuring the Articles module
+angular.module('emails').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Emails', 'emails', 'dropdown', '/emails(/create)?');
+		Menus.addSubMenuItem('topbar', 'emails', 'List Emails', 'emails');
+		Menus.addSubMenuItem('topbar', 'emails', 'New Email', 'emails/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('emails').config(['$stateProvider',
+	function($stateProvider) {
+		// Emails state routing
+		$stateProvider.
+		state('listEmails', {
+			url: '/emails',
+			templateUrl: 'modules/emails/views/list-emails.client.view.html'
+		}).
+		state('createEmail', {
+			url: '/emails/create',
+			templateUrl: 'modules/emails/views/create-email.client.view.html'
+		}).
+		state('viewEmail', {
+			url: '/emails/:emailId',
+			templateUrl: 'modules/emails/views/view-email.client.view.html'
+		}).
+		state('editEmail', {
+			url: '/emails/:emailId/edit',
+			templateUrl: 'modules/emails/views/edit-email.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Emails controller
+angular.module('emails').controller('EmailsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Emails',
+	function($scope, $stateParams, $location, Authentication, Emails) {
+		$scope.authentication = Authentication;
+
+		// Create new Email
+		$scope.create = function() {
+			// Create new Email object
+			var email = new Emails ({
+				name: this.name
+			});
+
+			// Redirect after save
+			email.$save(function(response) {
+				$location.path('emails/' + response._id);
+
+				// Clear form fields
+				$scope.name = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Remove existing Email
+		$scope.remove = function(email) {
+			if ( email ) { 
+				email.$remove();
+
+				for (var i in $scope.emails) {
+					if ($scope.emails [i] === email) {
+						$scope.emails.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.email.$remove(function() {
+					$location.path('emails');
+				});
+			}
+		};
+
+		// Update existing Email
+		$scope.update = function() {
+			var email = $scope.email;
+
+			email.$update(function() {
+				$location.path('emails/' + email._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Emails
+		$scope.find = function() {
+			$scope.emails = Emails.query();
+		};
+
+		// Find existing Email
+		$scope.findOne = function() {
+			$scope.email = Emails.get({ 
+				emailId: $stateParams.emailId
+			});
+		};
+	}
+]);
+'use strict';
+
+//Emails service used to communicate Emails REST endpoints
+angular.module('emails').factory('Emails', ['$resource',
+	function($resource) {
+		return $resource('api/emails/:emailId', { emailId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
+
+'use strict';
+
+// Configuring the Articles module
+angular.module('members').run(['Menus',
+    function(Menus) {
+        // Set top bar menu items
+        Menus.addMenuItem('topbar', 'Members', 'members', 'dropdown', '/members(/create)?');
+        Menus.addSubMenuItem('topbar', 'members', 'List members', 'members');
+        Menus.addSubMenuItem('topbar', 'members', 'New member', 'members/create');
+    }
+]);
+'use strict';
+
 //Setting up route
 angular.module('members').config(['$stateProvider',
 	function($stateProvider) {
@@ -331,8 +468,14 @@ angular.module('members').config(['$stateProvider',
 			url: '/members/:memberId/edit',
 			templateUrl: 'modules/members/views/edit-member.client.view.html'
 		});
+
+	/*	if(window.history && window.history.pushState) {
+			// use the HTML5 History API
+			$locationProvider.html5Mode(true);
+		}*/
 	}
 ]);
+
 'use strict';
 	var membersApp = angular.module('members');
 	// Members controller..
@@ -343,8 +486,12 @@ angular.module('members').config(['$stateProvider',
 
 			this.authentication = Authentication;
 
+			$scope.loading = true;
+
 			// Find a list of Members
-			this.members = Members.query();
+			this.members = Members.query(function(){
+				$scope.loading = false;
+			});
 
 			// Find existing Member
 			/*$scope.findOne = function() {
@@ -484,15 +631,16 @@ angular.module('members').config(['$stateProvider',
 	]);
 
 
-	membersApp.controller('MembersEditController', ['$scope', 'Members',
-		function($scope, Members) {
+	membersApp.controller('MembersEditController', ['$scope', 'Members', 'Notify',
+		function($scope, Members, Notify) {
 
 
 			// Update existing Member
 			this.update = function(updatedMember) {
 				var member = updatedMember;
 
-				member.$update(function() {
+				member.$update(function(response) {
+					Notify.sendMsg('MemberUpdated', {'id': response._id});
 
 				}, function(errorResponse) {
 					$scope.error = errorResponse.data.message;
@@ -503,29 +651,27 @@ angular.module('members').config(['$stateProvider',
 			// Remove existing Member
 			this.remove = function(member) {
 				if ( member ) {
-					member.$remove();
+					member.$remove(function(response){
+						Notify.sendMsg('MemberRemoved', {'id': response._id});
+					});
 
 					for (var i in this.members) {
 						if (this.members [i] === member) {
 							this.members.splice(i, 1);
-							console.log('member removed');
 						}
 					}
 				} else {
-					this.member.$remove(function() {
+					this.member.$remove(function(response) {
+						Notify.sendMsg('MemberRemoved', {'id': response._id});
 					});
 				}
 			};
 
 
-			/*Notify.getMsg('NewMember', function(event, data){
-				scope.memberCtrl.members = Members.query();
-			});*/
-
 		}
 	]);
 
-	membersApp.directive('memberList', ['Members', 'Notify', function() {
+	membersApp.directive('memberList', ['Members', 'Notify', function( Members, Notify) {
 		return {
 			restrict: 'E',
 			transclude: true,
@@ -535,11 +681,20 @@ angular.module('members').config(['$stateProvider',
 
 				Notify.getMsg('NewMember', function(event,data){
 					scope.membersCtrl.members = Members.query();
-
 				});
+
+				Notify.getMsg('MemberRemoved', function(event,data){
+					scope.membersCtrl.members = Members.query();
+				});
+
+				Notify.getMsg('MemberUpdated', function(event,data){
+					scope.membersCtrl.members = Members.query();
+				});
+
 			}
 		};
 	}]);
+
 
 /*
 */
@@ -551,7 +706,7 @@ angular.module('members')
 
 	.factory('Members', ['$resource',
 	function($resource) {
-		return $resource('members/:memberId', { memberId: '@_id'
+		return $resource('api/members/:memberId', { memberId: '@_id'
 		}, {
 			update: {
 				method: 'PUT'
@@ -566,8 +721,18 @@ angular.module('members')
 			notify.sendMsg = function(msg, data){
 				data = data || {};
 				$rootScope.$emit(msg, data);
-
-				console.log('message sent');
+				if (msg === 'NewMember'){
+					console.log('Notification: New Member is created');
+				}
+				else if (msg === 'MemberRemoved') {
+					console.log('Notification: Member is updated');
+				}
+				else if (msg === 'MemberUpdated'){
+					console.log('Notification: Member is removed');
+				}
+				else{
+					console.log('Notification: '+ msg);
+				}
 			};
 
 			notify.getMsg = function(msg, func, scope){
@@ -581,6 +746,123 @@ angular.module('members')
 			return notify;
 		}
 	]);
+
+'use strict';
+
+// Configuring the Articles module
+angular.module('projects').run(['Menus',
+	function(Menus) {
+		// Set top bar menu items
+		Menus.addMenuItem('topbar', 'Projects', 'projects', 'dropdown', '/projects(/create)?');
+		Menus.addSubMenuItem('topbar', 'projects', 'List Projects', 'projects');
+		Menus.addSubMenuItem('topbar', 'projects', 'New Project', 'projects/create');
+	}
+]);
+'use strict';
+
+//Setting up route
+angular.module('projects').config(['$stateProvider',
+	function($stateProvider) {
+		// Projects state routing
+		$stateProvider.
+		state('listProjects', {
+			url: '/projects',
+			templateUrl: 'modules/projects/views/list-projects.client.view.html'
+		}).
+		state('createProject', {
+			url: '/projects/create',
+			templateUrl: 'modules/projects/views/create-project.client.view.html'
+		}).
+		state('viewProject', {
+			url: '/projects/:projectId',
+			templateUrl: 'modules/projects/views/view-project.client.view.html'
+		}).
+		state('editProject', {
+			url: '/projects/:projectId/edit',
+			templateUrl: 'modules/projects/views/edit-project.client.view.html'
+		});
+	}
+]);
+'use strict';
+
+// Projects controller
+angular.module('projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Projects',
+	function($scope, $stateParams, $location, Authentication, Projects) {
+		$scope.authentication = Authentication;
+
+		// Create new Project
+		$scope.create = function() {
+			// Create new Project object
+			var project = new Projects ({
+				name: this.name
+			});
+
+			// Redirect after save
+			project.$save(function(response) {
+				$location.path('projects/' + response._id);
+
+				// Clear form fields
+				$scope.name = '';
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Remove existing Project
+		$scope.remove = function(project) {
+			if ( project ) { 
+				project.$remove();
+
+				for (var i in $scope.projects) {
+					if ($scope.projects [i] === project) {
+						$scope.projects.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.project.$remove(function() {
+					$location.path('projects');
+				});
+			}
+		};
+
+		// Update existing Project
+		$scope.update = function() {
+			var project = $scope.project;
+
+			project.$update(function() {
+				$location.path('projects/' + project._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Projects
+		$scope.find = function() {
+			$scope.projects = Projects.query();
+		};
+
+		// Find existing Project
+		$scope.findOne = function() {
+			$scope.project = Projects.get({ 
+				projectId: $stateParams.projectId
+			});
+		};
+	}
+]);
+'use strict';
+
+//Projects service used to communicate Projects REST endpoints
+angular.module('projects').factory('Projects', ['$resource',
+	function($resource) {
+		return $resource('api/projects/:projectId', { projectId: '@_id'
+		}, {
+			update: {
+				method: 'PUT'
+			}
+		});
+	}
+]);
+
 'use strict';
 
 // Config HTTP Error Handling
@@ -824,7 +1106,7 @@ angular.module('users').factory('Authentication', [
 // Users service used for communicating with the users REST endpoint
 angular.module('users').factory('Users', ['$resource',
 	function($resource) {
-		return $resource('users', {}, {
+		return $resource('api/users', {}, {
 			update: {
 				method: 'PUT'
 			}

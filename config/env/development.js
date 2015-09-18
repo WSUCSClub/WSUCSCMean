@@ -1,6 +1,5 @@
 'use strict';
 
-require('dotenv').load();
 
 module.exports = {
 	db:  process.env.MONGO_DB,
