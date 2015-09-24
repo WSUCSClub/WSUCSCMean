@@ -1,0 +1,38 @@
+<section data-ng-controller="UserController">
+<div class="row">
+        <div class="col-lg-12">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>User</span></th>
+                                <th><span>Created</span></th>
+                                <th><span>Email</span></th>
+                                <th>Set admin</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr data-ng-repeat="member in membersCtrl.members | filter:searchText">
+                                    <td>
+                                        <img src="http://bootdey.com/img/Content/user_1.jpg" alt="">
+                                        <a data-ng-href="#!/members/{{member._id}}" class="user-link">{{member.firstName + ' ' + member.lastName}}</a>
+                                        <span class="user-subhead">Member</span>
+                                    </td>
+                                    <td>{{member.created | date:'mediumDate'}}</td>
+
+                                    <td>
+                                        <a href="#">{{member.email}}</a>
+                                    </td>
+                                    
+                                </tr>
+ 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

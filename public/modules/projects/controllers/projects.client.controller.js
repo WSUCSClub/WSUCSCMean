@@ -5,6 +5,7 @@ angular.module('projects').controller('ProjectsController', ['$scope', '$statePa
 	function($scope, $stateParams, $location, Authentication, Projects) {
 		$scope.authentication = Authentication;
 		
+		console.log(window.user);
 
 
 

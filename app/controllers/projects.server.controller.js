@@ -21,8 +21,6 @@ exports.create = function(req, res) {
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			var socketio = req.app.get('socketio'); // tacke out socket instance from the app container
-			socketio.sockets.emit('project.created', project); // emit an event for all connected clients
 			res.jsonp(project);
 		}
 	});
@@ -102,7 +100,7 @@ exports.projectByID = function(req, res, next, id) {
  * Project authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.project.user.id !== req.user.id) {
+	if (req.project.user.id !== req.user.id  && req.user.roles[1] !== 'admin') {
 		return res.status(403).send('User is not authorized');
 	}
 	next();

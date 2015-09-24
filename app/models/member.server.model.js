@@ -54,7 +54,7 @@ var MemberSchema = new Schema({
 			type: String,
 			enum: ['Member','Past Member','Active Member', 'Secretary', 'Public Relations Responsible','Project Committee Responsible','Vice-president','Faculty','President', 'Treasurer', 'Membership Committee responsible']
 		}],
-		default: 'Member'
+		default: ['Member']
 	},
 	phone: {
 		type: String,
