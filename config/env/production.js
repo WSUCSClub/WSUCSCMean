@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/starterapp',
+	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/starterapp' ||  'mongodb://'+ process.env.MONGOLAB_USERNAME + ':' + process.env.MONGOLAB_PASSWORD +'@ds035673.mongolab.com:35673/mean-database',
 	assets: {
 		lib: {
 			css: [
@@ -21,7 +21,8 @@ module.exports = {
 				'public/lib/angular-ui-router/release/angular-ui-router.min.js',
 				'public/lib/angular-ui-utils/ui-utils.min.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js',
-				'public/lib/angular-ui-notification/dist/angular-ui-notification.min.js'
+				'public/lib/angular-ui-notification/dist/angular-ui-notification.min.js',
+				'public/lib/angular-socket-io/socket.min.js'
 			]
 		},
 		css: 'public/dist/application.min.css',

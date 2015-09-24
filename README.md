@@ -1,5 +1,6 @@
 ![WSU CSC](http://wsucscmean.herokuapp.com/modules/core/img/WSU_CSC_Logo_Color_Web.png)
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/WSUCSClub)  
 
 
 ## What is this?

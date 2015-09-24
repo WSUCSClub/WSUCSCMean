@@ -4,6 +4,10 @@
 angular.module('projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Projects',
 	function($scope, $stateParams, $location, Authentication, Projects) {
 		$scope.authentication = Authentication;
+		
+
+
+
 
 		// Create new Project
 		$scope.create = function() {
@@ -22,6 +26,8 @@ angular.module('projects').controller('ProjectsController', ['$scope', '$statePa
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+	
 
 		// Remove existing Project
 		$scope.remove = function(project) {

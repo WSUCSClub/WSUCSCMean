@@ -27,6 +27,9 @@ module.exports = function(db) {
 	// Initialize express app
 	var app = express();
 
+
+
+
 	// Globbing model files
 	config.getGlobbedFiles('./app/models/**/*.js').forEach(function(modelPath) {
 		require(path.resolve(modelPath));
@@ -158,6 +161,8 @@ module.exports = function(db) {
 		return httpsServer;
 	}
 
+
 	// Return Express server instance
 	return app;
 };
+

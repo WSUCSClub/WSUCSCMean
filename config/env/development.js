@@ -2,7 +2,7 @@
 
 
 module.exports = {
-	db:  process.env.MONGOLAB_URI,
+	db:  process.env.MONGOLAB_URI || 'mongodb://'+ process.env.MONGOLAB_USERNAME + ':' + process.env.MONGOLAB_PASSWORD +'@ds035673.mongolab.com:35673/mean-database' ,
 	app: {
 		title: 'WSU Computer Science Club - administration'
 	},
