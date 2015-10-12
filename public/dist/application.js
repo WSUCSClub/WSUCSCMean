@@ -4,7 +4,8 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'wsucsclub';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',  'ngAnimate',  'ngTouch',  'ngSanitize',  'ui.router', 'ui.bootstrap', 'ui.utils'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies', 'ngAnimate',  'ngTouch',  'ngSanitize', 
+	 'ui.router', 'ui.bootstrap', 'ui.utils'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName, dependencies) {
@@ -21,6 +22,7 @@ var ApplicationConfiguration = (function() {
 		registerModule: registerModule
 	};
 })();
+
 'use strict';
 
 //Start by defining the main module and adding the module dependencies
@@ -489,16 +491,14 @@ angular.module('members').config(['$stateProvider',
 			$scope.loading = true;
 
 			// Find a list of Members
-			this.members = Members.query(function(){
-				$scope.loading = false;
-			});
+			this.members = Members.query();
 
 			// Find existing Member
-			/*$scope.findOne = function() {
+			$scope.findOne = function() {
 				$scope.member = Members.get({
 					memberId: $stateParams.memberId
 				});
-			};*/
+			};
 
 
 
@@ -789,6 +789,11 @@ angular.module('projects').config(['$stateProvider',
 angular.module('projects').controller('ProjectsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Projects',
 	function($scope, $stateParams, $location, Authentication, Projects) {
 		$scope.authentication = Authentication;
+		
+		console.log(window.user);
+
+
+
 
 		// Create new Project
 		$scope.create = function() {
@@ -807,6 +812,8 @@ angular.module('projects').controller('ProjectsController', ['$scope', '$statePa
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+	
 
 		// Remove existing Project
 		$scope.remove = function(project) {
@@ -935,6 +942,10 @@ angular.module('users').config(['$stateProvider',
 		state('reset', {
 			url: '/password/reset/:token',
 			templateUrl: 'modules/users/views/password/reset-password.client.view.html'
+		}).
+		state('users', {
+			url: '/users',
+			templateUrl: 'modules/users/views/users.client.view.html'
 		});
 	}
 ]);
@@ -1088,6 +1099,38 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 				$scope.error = response.message;
 			});
 		};
+	}
+]);
+
+
+'use strict';
+
+// Projects controller
+angular.module('users').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
+	function($scope, $stateParams, $location, Authentication, Users) {
+		
+
+		$scope.authentication = Authentication;
+		
+		console.log(window.user);
+
+		// Update existing Project
+		$scope.update = function() {
+			var user = $scope.users;
+
+			user.$update(function() {
+				$location.path('api/users/' + user._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
+
+		// Find a list of Projects
+		$scope.find = function() {
+			$scope.users = Users.query();
+		};
+
+
 	}
 ]);
 
