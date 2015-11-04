@@ -9,6 +9,9 @@ It aims to organize the club member list and send custom email to a list of memb
 This app is built using the [Mean stack] (https:/meanjs.org/)
 Mean is a full stack web app using MongoDb (NoSQL database) / NodeJs and Express for server side / Angular for client side
 
+![preview](https://dl.dropboxusercontent.com/u/2061836/preview.png)
+
+
 This is a step by step for beginners to get the project working on their station
 
 ## How to view this project on your machine?
