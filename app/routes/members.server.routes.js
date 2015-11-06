@@ -17,6 +17,7 @@ module.exports = function(app) {
 	// Finish by binding the Member middleware
 	app.param('memberId', members.memberByID);
 
-	app.route('/api/email')
-		.get(members.sendemail);
+
+	//app.route('/api/email')
+	//	.get(members.sendemail);
 };

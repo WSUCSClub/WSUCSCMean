@@ -99,6 +99,9 @@ exports.memberByID = function(req, res, next, id) {
 	});
 };
 
+
+
+
 /**
  * Member authorization middleware
  */

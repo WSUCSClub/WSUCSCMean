@@ -1,0 +1,16 @@
+#!/bin/bash
+#my starting app 
+
+echo "Hello World!"
+echo "Setup MONGOLAB" 
+
+export MONGOLAB_USERNAME=hakimelek
+export MONGOLAB_PASSWORD=12345678
+echo "MONGOLAB credentials were entered"
+
+export NODE_ENV=development
+echo "Development env is set" 
+
+export MAILER_FROM=contact@malekhakim.me
+export MAILER_SERVICE_PROVIDER=mail.privatemail.com
+export MAILER_EMAIL_ID=

@@ -16,7 +16,9 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap.css',
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 				'public/lib/angular-ui-notification/src/angular-ui-notification.less',
-				'public/lib/fontawesome/css/font-awesome.css'
+				'public/lib/fontawesome/css/font-awesome.css',
+				'public/lib/ng-tags-input/ng-tags-input.css'
+
 			],
 			js: [
 				'public/lib/angular/angular.js',
@@ -29,9 +31,7 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
 				'public/lib/angular-ui-notification/src/angular-ui-notification.js',
-				'public/lib/socket.io-client/socket.io.js', 
-				'public/lib/angular-socket-io/socket.io.js', 
-				'public/lib/angular-socket-io/socket.js', 
+				'public/lib/ng-tags-input/ng-tags-input.js'
 			]
 		},
 		css: [

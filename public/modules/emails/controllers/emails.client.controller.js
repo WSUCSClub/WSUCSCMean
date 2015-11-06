@@ -1,23 +1,39 @@
 'use strict';
 
 // Emails controller
-angular.module('emails').controller('EmailsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Emails',
-	function($scope, $stateParams, $location, Authentication, Emails) {
+angular.module('emails').controller('EmailsController', ['$scope',  '$stateParams', '$location', 'Authentication' ,'Members', 'Emails',
+	function($scope, $stateParams, $location, Authentication, Members, Emails) {
+		
 		$scope.authentication = Authentication;
+
+        var members = Members.query();
+
+ 		$scope.SendTo = members;
+
+
+         $scope.loadTags = function($query) {
+            //return Members.query().email;
+            return members; 
+
+           // return $http.get('/tags?query=' + query);
+        };
 
 		// Create new Email
 		$scope.create = function() {
 			// Create new Email object
 			var email = new Emails ({
-				name: this.name
+				content: this.content,
+				subject: this.subject
 			});
 
 			// Redirect after save
 			email.$save(function(response) {
-				$location.path('emails/' + response._id);
+				$location.path('api/emails/' + response._id);
 
 				// Clear form fields
-				$scope.name = '';
+				$scope.content = 'No text'; 
+				$scope.subject = 'No subject'; 
+
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -45,11 +61,24 @@ angular.module('emails').controller('EmailsController', ['$scope', '$stateParams
 			var email = $scope.email;
 
 			email.$update(function() {
-				$location.path('emails/' + email._id);
+				$location.path('/emails/' + email._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
 		};
+
+		$scope.sendEmail = function() {
+			//for(var i = 0; i < $scope.SendTo.length; i++)
+
+			console.log($scope.SendTo);
+
+
+			$http
+			.post('/sendEmail', data, config)
+			.then(successCallback, errorCallback);
+
+		};
+
 
 		// Find a list of Emails
 		$scope.find = function() {

@@ -14,6 +14,8 @@ module.exports = function(app) {
 		.put(users.requiresLogin, emails.hasAuthorization, emails.update)
 		.delete(users.requiresLogin, emails.hasAuthorization, emails.delete);
 
+	app.route('/sendEmail').post(emails.sendEmail);
+
 	// Finish by binding the Email middleware
 	app.param('emailId', emails.emailByID);
 };

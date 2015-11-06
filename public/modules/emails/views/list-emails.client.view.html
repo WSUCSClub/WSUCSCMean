@@ -4,7 +4,8 @@
     </div>
     <div class="list-group">
         <a data-ng-repeat="email in emails" data-ng-href="#!/emails/{{email._id}}" class="list-group-item">
-			<small class="list-group-item-text">
+			<h3>{{email.subject}}</h3>
+            <small class="list-group-item-text">
 				Posted on
 				<span data-ng-bind="email.created | date:'medium'"></span>
 				by
